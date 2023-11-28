@@ -726,6 +726,7 @@ intrinsic integrationMatrix(bas::SeqEnum,p::RngIntElt,pt0::PtHyp,prec::RngIntElt
 			mat:=matP;
 			flag:=true;
 		else
+			mat:=ChangeRing(mat, CoefficientRing(matP));
 			mat:=VerticalJoin(mat,matP);
 		end if;
 	end for;
@@ -879,11 +880,12 @@ intrinsic leadingTerms(pt::PtHyp,p::RngIntElt,prec::RngIntElt) -> SeqEnum
 			flag:=true;
 			dTot:=dP;
 		else
-			matP:=HorizontalJoin(ZeroMatrix(Qp,2*dP,dTot),matP);
+			matP:=HorizontalJoin(ZeroMatrix(BaseRing(matP),2*dP,dTot),matP);
 			dTot:=dTot+dP;
 			if dTot lt d then
-				matP:=HorizontalJoin(matP,ZeroMatrix(Qp,2*dP,d-dTot));	
+				matP:=HorizontalJoin(matP,ZeroMatrix(BaseRing(matP),2*dP,d-dTot));
 			end if;
+			mat:=ChangeRing(mat, CoefficientRing(matP));
 			mat:=VerticalJoin(mat,matP);
 		end if;
 	end for;
@@ -960,6 +962,7 @@ intrinsic chabauty(bas::SeqEnum,ptList::SeqEnum,pt0::PtHyp,p::RngIntElt)->SeqEnu
 		print "point", pt;
 		Npt:=leadingTerms(pt,p,5);
 		print "the leading terms matrix is", truncMat(Npt,p,3);
+		E:=ChangeRing(E, CoefficientRing(Npt));
 		ENpt:=E*Npt;
 		print "E*Npt=", truncMat(ENpt,p,3);
 		redSubMat:=Matrix([[Fp!(Integers()!ENpt[i,j]) : j in [1..d]] : i in [(r+1)..(2*d)]]);		

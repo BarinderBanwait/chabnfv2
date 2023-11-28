@@ -7,6 +7,7 @@ Here's how to run the code on one example from Siksek's paper: open MAGMA at the
 Attach("g2-jac.m");
 Attach("add.m");
 load "JSearch.m";
+SetClassGroupBounds("GRH");
 
 Qu<u>:=PolynomialRing(Rationals());
 K<t>:=NumberField(u^3-2);
