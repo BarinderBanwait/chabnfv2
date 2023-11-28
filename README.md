@@ -20,16 +20,16 @@ C:=HyperellipticCurve(3*(4*eps^(-s)*x^5-eps^(2*s)));
 pts:=ratPointsC(C);
 ```
 
-This currently does not work; I'm getting a Runtime error:
+If all is well, you should see the following:
 
 ```
-In file "/home/barinder/chabnfv2/g2-jac.m", line 729, column 42:
->>                         mat:=VerticalJoin(mat,matP);
-
-Runtime error in 'VerticalJoin': Arguments have incompatible coefficient rings
+Chabauty is respectively successful at [ true, true, true, true, true ]
+after applying Chabauty with prime 31
+W has 0 elements
+succeeded in proving that the only K-rational points are [ (1 : 0 : 0), (1 : 3 :
+1), (1/3*(t^2 + 2*t + 1) : 1/3*(-10*t^2 - 8*t - 13) : 1), (1 : -3 : 1), 
+(1/3*(t^2 + 2*t + 1) : 1/3*(10*t^2 + 8*t + 13) : 1) ]
 ```
-
-This is probably some change in MAGMA in the intervening 13 years since Siksek wrote his code; I am currently debugging this.
 
 This is a unit test; any changes made to underlying routines should be such that this example still works.
 
